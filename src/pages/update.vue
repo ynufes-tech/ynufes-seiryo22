@@ -1,14 +1,25 @@
 <script setup>
-import {event} from "vue-gtag";
-import store from "@/store";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useMainStore} from '@/stores/main';
+import {useSeoMeta} from '#imports';
+
+const store = useMainStore();
+
+useSeoMeta({
+  title: '更新情報',
+  description: '22清陵祭HPの更新情報を掲載しています。'
+});
 
 function getUpdate() {
-  return store.state.updates;
+  return store.updates;
 }
 
-if (process.env.NODE_ENV === "production") {
-  event("page:updates");
-}
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:updates');
+  }
+});
 
 function getDate(d) {
   const date = new Date(d);
@@ -50,7 +61,7 @@ function getTime(d) {
 }
 
 #content-frame {
-  width: unquote("min(100% - 2rem, 50rem)");
+  width: min(calc(100% - 2rem), 50rem);
   margin-inline: auto;
   justify-content: center;
 

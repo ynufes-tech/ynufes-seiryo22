@@ -1,15 +1,18 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({
-  title: "他大学祭のご紹介",
-  description: "本大学祭と提携している大学祭について紹介しています"
+useSeoMeta({
+  title: '他大学祭のご紹介',
+  description: '本大学祭と提携している大学祭について紹介しています'
 });
-if (process.env.NODE_ENV === "production") {
-  event("page:OtherFes");
-}
 
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:OtherFes');
+  }
+});
 </script>
 <template>
   <h1 id="page-title" class="fadeUp">他大学祭のご紹介</h1>
@@ -66,7 +69,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 .cell-holder {
-  width: unquote("min(100% - 1rem, 80rem)");
+  width: min(calc(100% - 1rem), 80rem);
   justify-content: center;
   gap: 2em;
   display: flex;
@@ -80,7 +83,7 @@ if (process.env.NODE_ENV === "production") {
   border-radius: 2rem;
   aspect-ratio: 2;
   flex-shrink: 0;
-  width: unquote("min(100% - 1rem, 600px)");
+  width: min(calc(100% - 1rem), 600px);
   background: white;
   position: relative;
   box-shadow: 0 19.2px 19.8px rgba(0, 0, 0, 0.092),

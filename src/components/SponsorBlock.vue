@@ -1,16 +1,13 @@
 <script setup>
-// Import Swiper Vue.js components
+import axios from 'axios';
+import {event} from 'vue-gtag';
 import {Swiper, SwiperSlide} from 'swiper/vue';
-import {event} from "vue-gtag";
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/autoplay'
-
-// import Swiper core and required modules
 import SwiperCore, {Autoplay} from 'swiper';
-import axios from "axios";
-import store from "@/store";
-// install Swiper modules
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import {useMainStore} from '@/stores/main';
+
+const store = useMainStore();
 SwiperCore.use([Autoplay]);
 
 const randomList = function (rand) {
@@ -23,16 +20,16 @@ const randomList = function (rand) {
 }
 
 const access = async function (id) {
-  if (process.env.NODE_ENV === "production") {
-    event("sponsor:click", {
-      sponsor_id: id,
+  if (import.meta.env.PROD) {
+    event('sponsor:click', {
+      sponsor_id: id
     });
   }
-  axios.get("https://shion1305.com/seiryo22/request?target=" + id);
+  axios.get('https://shion1305.com/seiryo22/request?target=' + id);
 }
 </script>
 <template>
-  <swiper v-if="store.state.sponsors.length!==0" :autoplay="{
+  <swiper v-if="store.sponsors.length!==0" :autoplay="{
   delay: 4500,
   disableOnInteraction: false,
   }" :breakpoints="{
@@ -52,7 +49,7 @@ const access = async function (id) {
           :spaceBetween="10"
           class="sponsorsSwiper">
 
-    <swiper-slide v-for="ad in randomList(store.state.sponsors)" :key="ad.id">
+    <swiper-slide v-for="ad in randomList(store.sponsors)" :key="ad.id">
       <a :href="`${ad.url}`" rel="noopener noreferrer"
          target="_blank"
          v-on:click="access(`${ad.sponsor}`)"><img

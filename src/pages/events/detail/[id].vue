@@ -1,35 +1,50 @@
 <script setup>
-import sourceData from "@/assets/data.json"
-import {defineProps, ref} from "vue";
-import {useMeta} from "vue-meta";
+import {computed, onMounted, ref} from 'vue';
+import {useRoute} from 'vue-router';
 import {event} from 'vue-gtag';
+import sourceData from '@/assets/data.json';
+import {useSeoMeta} from '#imports';
 
-const props = defineProps({
-  eventId: {type: Number, required: true},
+const route = useRoute();
+const eventId = computed(() => parseInt(route.params.id, 10));
+const eventData = computed(() => sourceData.find((data) => data.id === eventId.value));
+
+useSeoMeta(() => {
+  const data = eventData.value;
+  if (!data) {
+    return {
+      title: 'ページが見つかりませんでした',
+      description: 'お探しのページは見つかりませんでした'
+    };
+  }
+
+  return {
+    title: `${data.event_name}(${data.org_name})の企画詳細`,
+    description: `22清陵祭オンライン企画『${data.event_name}』(${data.org_name}) の企画詳細ページです。${data.event_description}`
+  };
 });
-const eventData = sourceData.find((data) => data.id === props.eventId);
-useMeta({
-  title: eventData.event_name + "(" + eventData.org_name + ")の企画詳細",
-  description: "22清陵祭オンライン企画『" + eventData.event_name + "』(" + eventData.org_name + ") の企画詳細ページです。" + eventData.event_description
+
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:event_detail', {
+      event_id: eventId.value
+    });
+  }
 });
-if (process.env.NODE_ENV === "production") {
-  event("page:event_detail", {
-    event_id: props.eventId,
-  });
-}
-let previewPDF = ref(true)
+
+const previewPDF = ref(true);
 
 function pdfLoaded() {
-  console.log("PDFLOADED")
+  console.log('PDFLOADED');
 }
 
 function pdfError() {
-  console.log("error")
+  console.log('error');
   previewPDF.value = false;
 }
 </script>
 <template>
-  <div class="content-frame">
+  <div v-if="eventData" class="content-frame">
     <div class="content-block fadeUp">
       <div class="top_area fadeLeft">
         <div class="icon_title_block">
@@ -355,7 +370,7 @@ function pdfError() {
 #sns-area {
   display: flex;
   justify-content: center;
-  font-size: unquote("min(1vw,15px)");
+  font-size: min(1vw, 15px);
 
   .sns_block {
     padding: 1em;
@@ -365,7 +380,7 @@ function pdfError() {
 
     img {
       margin: auto;
-      width: unquote("min(80px,25vw)");
+      width: min(80px, 25vw);
       object-fit: cover;
     }
 

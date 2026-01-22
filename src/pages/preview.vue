@@ -1,11 +1,18 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({title: 'プレビュー', description: '企画団体用のプレビューサイトです。プレビューサイトの公開は終了しました。'})
-if (process.env.NODE_ENV === "production") {
-  event("page:preview_end");
-}
+useSeoMeta({
+  title: 'プレビュー',
+  description: '企画団体用のプレビューサイトです。プレビューサイトの公開は終了しました。'
+});
+
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:preview_end');
+  }
+});
 </script>
 <template>
   <div>

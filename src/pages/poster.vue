@@ -1,15 +1,18 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({
-  title: "作成中...",
-  description: "このページは作成中です!公開までしばらくお待ちください"
-})
+useSeoMeta({
+  title: '作成中...',
+  description: 'このページは作成中です!公開までしばらくお待ちください'
+});
 
-if (process.env.NODE_ENV === "production") {
-  event("page:under_construction");
-}
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:under_construction');
+  }
+});
 </script>
 <template>
   <div class="content-frame fadeUp" style="animation-delay: 0.2s">
@@ -38,7 +41,7 @@ if (process.env.NODE_ENV === "production") {
   flex-direction: column;
   align-items: center;
   border-radius: 2rem;
-  background-image: url("/public/image/image2.webp");
+  background-image: url("/image/image2.webp");
   margin-bottom: 1rem;
 }
 

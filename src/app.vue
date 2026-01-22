@@ -1,73 +1,75 @@
 <script setup>
-import {createClient} from "microcms-js-sdk"; //ES6
-import {useMeta} from 'vue-meta';
-import store from "@/store";
-import {onMounted, ref} from "vue";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import {createClient} from 'microcms-js-sdk';
+import {onBeforeUnmount, onMounted, ref} from 'vue';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import {useMainStore} from '@/stores/main';
+import {useRuntimeConfig} from '#imports';
 
-const client = createClient({
-  serviceDomain: "ynufes-seiryo22", // YOUR_DOMAIN is the XXXX part of XXXX.microcms.io
-  apiKey: "26191c4b25ad49f1a00e982735c5831e5ab5",
-});
 const loaded = ref(false);
+const store = useMainStore();
+const runtimeConfig = useRuntimeConfig();
+const client = createClient({
+  serviceDomain: runtimeConfig.public.microcmsServiceDomain,
+  apiKey: runtimeConfig.public.microcmsApiKey
+});
 
 function getLatestUpdate() {
-  client.get({
-    endpoint: 'updates',
-  }).then((data) => {
-    store.commit('setUpdates', data.contents);
-    // this.updates = data.contents.slice(0, 3);
-  });
+  client
+    .get({
+      endpoint: 'updates'
+    })
+    .then((data) => {
+      store.setUpdates(data.contents);
+    });
 }
 
 function getLatestSlides() {
-  client.get({
-    endpoint: 'slides'
-  }).then((data) => {
-        store.commit('setSlide', data.contents)
-      }
-  );
+  client
+    .get({
+      endpoint: 'slides'
+    })
+    .then((data) => {
+      store.setSlides(data.contents);
+    });
 }
 
 function getLatestSponsors() {
-  client.get({
-    endpoint: 'ads'
-  }).then((data) => {
-        store.commit('setSponsors', data.contents);
-      }
-  );
+  client
+    .get({
+      endpoint: 'ads'
+    })
+    .then((data) => {
+      store.setSponsors(data.contents);
+    });
 }
+
+const handleWindowLoad = () => {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    loader.classList.add('loaded');
+  }
+  loaded.value = true;
+  getLatestSlides();
+};
 
 onMounted(() => {
   getLatestSponsors();
   getLatestUpdate();
-  window.onload = () => {
-    const loader = document.getElementById('loader');
-    loader.classList.add('loaded');
-    loaded.value = true;
-    getLatestSlides();
+
+  if (document.readyState === 'complete') {
+    handleWindowLoad();
+    return;
   }
+
+  window.addEventListener('load', handleWindowLoad);
 });
-useMeta({
-  title: '',
-  htmlAttrs: {lang: 'ja', amp: true},
-  description: ''
+
+onBeforeUnmount(() => {
+  window.removeEventListener('load', handleWindowLoad);
 });
-</script>
-<!--setupは複数回実行される可能性があるのに対し、scriptタグ内は1回のみ実行される。-->
-<script>
-document.querySelector("[name='description']").remove()
 </script>
 <template>
-  <!--  vue-meta expression starts from here-->
-  <metainfo>
-    <template v-slot:title="{ content }">{{
-        content ? `${content} | 22清陵祭公式ホームページ 横浜国立大学大学祭` : `22清陵祭公式ホームページ 横浜国立大学大学祭`
-      }}
-    </template>
-  </metainfo>
-  <!--  vue-meta expression ends here-->
   <div class="wrapper">
     <div id="loader" style="color: white;font-family: 'Kaisei Decol', serif;">
       <div style="font-size: 6rem;font-family: 'Kaisei Decol', serif;">花笑み</div>
@@ -82,7 +84,7 @@ document.querySelector("[name='description']").remove()
     <img alt="" class="background_img" src="@/assets/background_img-1.webp"/>
     <Header v-show="loaded" id="header" class="fadeUp"/>
     <div v-show="loaded" id="body-frame">
-      <router-view/>
+      <NuxtPage/>
       <Footer/>
     </div>
   </div>

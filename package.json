@@ -3,36 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "node .output/server/index.mjs",
+    "preview": "nuxt preview",
+    "lint": "eslint . --ext .js,.vue"
   },
   "dependencies": {
-    "axios": "^0.28.0",
-    "core-js": "^3.22.1",
-    "express": "^4.19.2",
-    "microcms-js-sdk": "^2.0.0",
-    "vue": "^3.2.33",
-    "vue-gtag": "^2.0.1",
-    "vue-meta": "3.0.0-alpha.10",
-    "vue-router": "^4.0.14",
-    "vue-tweet": "^1.2.1",
-    "vuejs-twitter-feed": "^1.0.1",
-    "vuex": "^4.0.2",
-    "webpack": "^5.76.0"
+    "@pinia/nuxt": "^0.11.3",
+    "axios": "^1.13.2",
+    "microcms-js-sdk": "^2.7.0",
+    "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
+    "swiper": "^8.4.7",
+    "vue-gtag": "^2.1.2",
+    "vue-tweet": "^1.3.0",
+    "vuejs-twitter-feed": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/eslint-parser": "^7.17.0",
-    "@vue/cli-plugin-babel": "~5.0.4",
-    "@vue/cli-plugin-eslint": "~5.0.4",
-    "@vue/cli-plugin-router": "~5.0.4",
-    "@vue/cli-plugin-vuex": "~5.0.4",
-    "@vue/cli-service": "~5.0.4",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.6.0",
-    "node-sass": "^9.0.0",
-    "sass-loader": "^12.6.0",
-    "swiper": "^8.1.0"
-  }
+    "@babel/core": "^7.28.6",
+    "@babel/eslint-parser": "^7.28.6",
+    "eslint": "^9.39.1",
+    "eslint-plugin-vue": "^9.33.0",
+    "sass": "^1.97.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@10.26.2"
 }

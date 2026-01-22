@@ -9,16 +9,20 @@
 </template>
 
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({
-  title: "404 ページが見つかりませんでした",
-  description: "お探しのページは見つかりませんでした"
+useSeoMeta({
+  title: '404 ページが見つかりませんでした',
+  description: 'お探しのページは見つかりませんでした'
 });
-if (process.env.NODE_ENV === "production") {
-  event("page:not_found");
-}
+
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:not_found');
+  }
+});
 </script>
 
 <style scoped>
@@ -38,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
   flex-direction: column;
   align-items: center;
   border-radius: 2rem;
-  background-image: url("/public/image/image2.webp");
+  background-image: url("/image/image2.webp");
   margin-bottom: 1rem;
 }
 

@@ -1,29 +1,44 @@
 # ynufes_seiryo22_vue
 
-## Project setup
+## 概要
+
+Nuxt 4 へ移行済みのフロントエンドです。`public/` 配下の静的ファイルをそのまま配信します。
+
+## 開発環境
+
+- Node.js 24
+- pnpm
+
+## セットアップ
 
 ```
-npm install
+pnpm install
 ```
 
-### Compiles and hot-reloads for development
+## 開発サーバー
 
 ```
-npm run serve
+pnpm dev
 ```
 
-### Compiles and minifies for production
+## ビルド
 
 ```
-npm run build
+pnpm build
 ```
 
-### Lints and fixes files
+## 本番起動
 
 ```
-npm run lint
+pnpm start
 ```
 
-### Customize configuration
+## Lint
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+pnpm lint
+```
+
+## デプロイ
+
+main ブランチへの push で Cloudflare へデプロイします。ワークフローは `.github/workflows/deploy-cloudflare.yml` を参照してください。

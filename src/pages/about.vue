@@ -1,13 +1,14 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import FlowerFrame from "@/components/FlowerFrame";
-import {Swiper, SwiperSlide} from "swiper/vue";
-import {Autoplay, Navigation} from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import SponsorBlock from "@/components/SponsorBlock";
+import {onMounted} from 'vue';
 import {event} from 'vue-gtag';
+import FlowerFrame from '@/components/FlowerFrame';
+import SponsorBlock from '@/components/SponsorBlock';
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Autoplay, Navigation} from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import {useSeoMeta} from '#imports';
 
 function getShuffledImages() {
   const target = [
@@ -26,11 +27,17 @@ function getShuffledImages() {
       .map(({value}) => value);
 }
 
-if (process.env.NODE_ENV === "production") {
-  event("page:about");
-}
+useSeoMeta({
+  title: '清陵祭とは',
+  description:
+    '「22清陵祭」を開催するにあたりご協賛くださった企業の一覧を掲載しています。数多くの企業の皆様に多大なご協力を賜りました。心より感謝申し上げます。'
+});
 
-useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催するにあたりご協賛くださった企業の一覧を掲載しています。数多くの企業の皆様に多大なご協力を賜りました。心より感謝申し上げます。"})
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:about');
+  }
+});
 </script>
 
 <template>
@@ -40,12 +47,12 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
   <div class="about-head-wrapper">
     <div class="about-head fadeUp">
       <div class="about-head-text">
-        <div>
+        <div class="about-head-title">
           <h1>22清陵祭</h1>
           <h2>『花笑み』</h2>
-          <div class="flower-background">
-            <FlowerFrame/>
-          </div>
+        </div>
+        <div class="flower-background">
+          <FlowerFrame/>
         </div>
       </div>
       <div class="about-head-detail">
@@ -149,12 +156,20 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
   }
 }
 
+#body-frame .about-head-text .about-head-title {
+  z-index: 2;
+}
+
+#body-frame .about-head-text .flower-background {
+  z-index: 1;
+}
+
 .about-head-wrapper {
   margin: 2em 0 0 0;
   color: white;
   font-size: 20px;
   box-sizing: border-box;
-  height: unquote("min(50vw - 2.5em, 25rem)");
+  height: min(calc(50vw - 2.5em), 25rem);
   display: flex;
   z-index: 10;
   padding: 0;
@@ -186,17 +201,24 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
       flex-shrink: 0;
       aspect-ratio: 1;
       text-align: center;
+      display: block;
+      isolation: isolate;
       box-shadow: 0 1.9px 2.5px rgba(0, 0, 0, 0.057),
       0 5px 6.1px rgba(0, 0, 0, 0.076),
       0 10.1px 11.4px rgba(0, 0, 0, 0.086),
       0 19.2px 19.8px rgba(0, 0, 0, 0.092),
       0 38.4px 34.8px rgba(0, 0, 0, 0.1);
 
-      div {
+      .about-head-title {
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+        align-items: center;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        width: 100%;
       }
 
       h1 {
@@ -204,6 +226,8 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
         margin: 0.5rem;
         white-space: nowrap;
         font-weight: normal;
+        position: relative;
+        z-index: 2;
       }
 
       h2 {
@@ -211,20 +235,21 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
         font-weight: normal;
         font-size: 3.5em;
         margin: 0;
+        position: relative;
+        z-index: 2;
       }
 
       .flower-background {
         aspect-ratio: 1;
-        z-index: -10;
+        z-index: 1;
         margin: 0;
         position: absolute;
         width: 100%;
         height: 100%;
-        top: 0;
+        inset: 0;
+        pointer-events: none;
       }
     }
-
-
     .about-head-detail {
       box-sizing: border-box;
       padding: 1rem;
@@ -309,16 +334,16 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
     @keyframes head-extract {
       from {
         aspect-ratio: 1;
-        height: unquote("max(65vw,300px)");
+        height: max(65vw, 300px);
       }
       to {
         aspect-ratio: 0.5;
-        height: unquote("max(130vw,600px)");
+        height: max(130vw, 600px);
       }
     }
     .about-head {
       flex-direction: column;
-      width: unquote("max(65vw,300px)");;
+      width: max(65vw, 300px);
       background: linear-gradient(180deg, #ffd9f2, #ffffff);
 
       .about-head-text {
@@ -442,10 +467,10 @@ useMeta({title: '清陵祭とは', description: "「22清陵祭」を開催す�
   font-size: 1.2rem;
   box-sizing: border-box;
   border-radius: 5rem;
-  margin-top: -100px;
-  width: unquote("min(100% - 2rem, 70rem)");
+  margin-top: 50px;
+  width: min(calc(100% - 2rem), 70rem);
   background: white;
-  padding: 180px 0 5em 0;
+  padding: 2em 0 2em 0;
   box-shadow: 0 1.9px 2.5px rgba(0, 0, 0, 0.057),
   0 5px 6.1px rgba(0, 0, 0, 0.076),
   0 10.1px 11.4px rgba(0, 0, 0, 0.086),

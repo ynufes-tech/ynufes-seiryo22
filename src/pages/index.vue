@@ -1,24 +1,38 @@
 <script setup>
+import {onMounted, onBeforeUnmount, ref} from 'vue';
+import {event} from 'vue-gtag';
+import CarouselView from '@/components/CarouselView';
+import SponsorBlock from '@/components/SponsorBlock';
+import TwitterTimeline from '@/components/TwitterTimeline';
+import UpdateElement from '@/components/UpdateElement';
+import {useMainStore} from '@/stores/main';
+import {useSeoMeta} from '#imports';
 
-import CarouselView from "@/components/CarouselView";
-import SponsorBlock from "@/components/SponsorBlock";
-import TwitterTimeline from "@/components/TwitterTimeline";
-import UpdateElement from "@/components/UpdateElement";
-import store from "@/store";
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
-import {computed} from "vue";
+const store = useMainStore();
+const showTwitter = ref(false);
+const getNewestUpdate = () => store.updates.slice(0, 3);
 
-const getNewestUpdate = function () {
-  return store.state.updates.slice(0, 3);
+useSeoMeta({
+  title: '',
+  description: '横浜国立大学オンライン大学祭「22清陵祭」公式HPです。今年のテーマは『花笑み』! 楽しいオンライン企画が満載！'
+});
+
+const updateTwitterVisibility = () => {
+  showTwitter.value = window.innerWidth > 700;
 };
-if (process.env.NODE_ENV === "production") {
-  event("page:home");
-}
-useMeta({title: '', description: '横浜国立大学オンライン大学祭「22清陵祭」公式HPです。今年のテーマは『花笑み』! 楽しいオンライン企画が満載！'});
-const showTwitter = computed(() => {
-  return window.innerWidth > 700;
-})
+
+onMounted(() => {
+  updateTwitterVisibility();
+  window.addEventListener('resize', updateTwitterVisibility);
+
+  if (import.meta.env.PROD) {
+    event('page:home');
+  }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateTwitterVisibility);
+});
 </script>
 
 <template>
@@ -38,27 +52,18 @@ const showTwitter = computed(() => {
       </div>
       <div class="content1-home">
         <div class="home_events">
-          <router-link :to="{
-          name: 'event_list',
-          params: { type: 1 },
-        }" class="button_events_all hover-to-shrink1">
+          <router-link class="button_events_all hover-to-shrink1" to="/events">
             <img alt="全ての企画を見る" src="@/assets/home/event-button-1-min.webp"/>
             <div><p>全ての<br>企画</p></div>
           </router-link>
           <div class="button_events_other">
-            <router-link :to="{
-          name: 'event_list',
-          params: { type: 2 },
-        }" class="button_events_part hover-to-shrink1">
+            <router-link class="button_events_part hover-to-shrink1" to="/events/2">
               <img alt="本部企画" src="@/assets/home/event-button-2-min.webp"/>
               <div>
                 <p>本部企画</p>
               </div>
             </router-link>
-            <router-link :to="{
-          name: 'event_list',
-          params: { type: 3 },
-        }" class="button_events_part hover-to-shrink1">
+            <router-link class="button_events_part hover-to-shrink1" to="/events/3">
               <img alt="団体企画" src="@/assets/home/event-button-3-min.webp"/>
               <div><p>団体企画</p></div>
             </router-link>
@@ -87,7 +92,7 @@ const showTwitter = computed(() => {
         <h1>更新情報</h1>
         <div class="updates_frame">
           <UpdateElement v-for="update in getNewestUpdate()" :key="update.id" :update="update"/>
-          <router-link v-show="store.state.updates.length>=3" class="hover-to-shrink1" to="/update">
+          <router-link v-show="store.updates.length>=3" class="hover-to-shrink1" to="/update">
             <div class="more_updates">更新情報をもっとみる</div>
           </router-link>
         </div>

@@ -1,16 +1,18 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
-import {ref} from "vue";
+import {onMounted, ref} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({
-  title: "はまキャラグランプリ",
-  description: "はまフェスの公式キャラクターを計4点のエントリーから投票によって決定します! 皆さんの投票お待ちしております!!"
-})
+useSeoMeta({
+  title: 'はまキャラグランプリ',
+  description: 'はまフェスの公式キャラクターを計4点のエントリーから投票によって決定します! 皆さんの投票お待ちしております!!'
+});
 
-if (process.env.NODE_ENV === "production") {
-  event("page:hama_fes");
-}
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:hama_fes');
+  }
+});
 
 function moveGForm() {
   const el = document.getElementById("gform_iframe");
@@ -215,7 +217,7 @@ const showResult = ref(true)
 
 
 .main-container {
-  width: unquote("min(100% - 2rem, 70rem)");
+  width: min(calc(100% - 2rem), 70rem);
   font-size: 12px;
   animation-delay: 0.5s;
 
@@ -262,7 +264,7 @@ const showResult = ref(true)
           border-radius: 1em;
           display: flex;
           flex-direction: column;
-          font-size: unquote("min(3vw,15px)");
+          font-size: min(3vw, 15px);
 
           img {
             margin: auto;

@@ -1,18 +1,29 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-if (process.env.NODE_ENV === "production") {
-  event("pamphlet");
-}
-useMeta({title: 'デジタルパンフレット', description: '22清陵祭のデジタルパンフレットを掲載しています。ぜひご利用ください。'})
+useSeoMeta({
+  title: 'デジタルパンフレット',
+  description: '22清陵祭のデジタルパンフレットを掲載しています。ぜひご利用ください。'
+});
+
+const track = (label) => {
+  if (import.meta.env.PROD) {
+    event(label);
+  }
+};
+
+onMounted(() => {
+  track('pamphlet');
+});
 
 function download() {
-  event("pamphlet:download");
+  track('pamphlet:download');
 }
 
 function downloadL() {
-  event("pamphlet:downloadL");
+  track('pamphlet:downloadL');
 }
 </script>
 <template>
@@ -92,7 +103,7 @@ function downloadL() {
   text-align: center;
   justify-content: center;
   gap: 3%;
-  width: unquote("min(100% - 2rem,600px)");
+  width: min(calc(100% - 2rem), 600px);
 
   > a {
     text-decoration: none;
@@ -115,12 +126,12 @@ function downloadL() {
 }
 
 #section-back {
-  width: unquote("min(100% - 1rem, 25em)");
+  width: min(calc(100% - 1rem), 25em);
 }
 
 #main {
   animation-delay: 0.2s;
-  width: unquote("min(calc(100% - 2rem), 80rem)");
+  width: min(calc(100% - 2rem), 80rem);
   margin-inline: auto;
   position: relative;
 }
@@ -174,7 +185,7 @@ function downloadL() {
 
 #pdf-area {
   margin-top: 40px;
-  width: unquote("min(100vw - 4em, 1200px)");
+  width: min(calc(100vw - 4em), 1200px);
   height: 60vh;
 }
 
@@ -182,7 +193,7 @@ function downloadL() {
   .page {
     box-sizing: border-box;
     padding: 0.25rem 0.5rem;
-    width: unquote("min(100%,50rem)");
+    width: min(100%, 50rem);
 
     img {
       height: 100%;

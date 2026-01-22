@@ -1,14 +1,14 @@
 <script setup>
-import {Swiper, SwiperSlide} from "swiper/vue";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import store from "@/store";
-import {Autoplay, Navigation, Pagination} from "swiper";
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {Autoplay, Navigation, Pagination} from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import {useMainStore} from '@/stores/main';
 
+const store = useMainStore();
 const modules = [Autoplay, Pagination, Navigation];
-
 </script>
 <template>
   <div class="wrapper">
@@ -32,7 +32,7 @@ const modules = [Autoplay, Pagination, Navigation];
           <img alt="トップスライド" src="@/assets/imgs/top_slide.webp">
         </router-link>
       </swiper-slide>
-      <swiper-slide v-for="slide in store.state.slides" :key="slide.id">
+      <swiper-slide v-for="slide in store.slides" :key="slide.id">
         <router-link v-if="slide.isRouterLink" :to="slide.link">
           <img :src="slide.slide.url" alt="">
         </router-link>

@@ -1,15 +1,19 @@
 <script setup>
-import {useMeta} from "vue-meta";
-import {event} from "vue-gtag";
+import {onMounted} from 'vue';
+import {event} from 'vue-gtag';
+import {useSeoMeta} from '#imports';
 
-useMeta({
-  title: "ご協賛について",
-  description: "「22清陵祭」を開催するにあたりご協賛くださった企業の一覧を掲載しています。数多くの企業の皆様に多大なご協力を賜りました。心より感謝申し上げます。"
-})
+useSeoMeta({
+  title: 'ご協賛について',
+  description:
+    '「22清陵祭」を開催するにあたりご協賛くださった企業の一覧を掲載しています。数多くの企業の皆様に多大なご協力を賜りました。心より感謝申し上げます。'
+});
 
-if (process.env.NODE_ENV === "production") {
-  event("page:sponsors");
-}
+onMounted(() => {
+  if (import.meta.env.PROD) {
+    event('page:sponsors');
+  }
+});
 </script>
 <template>
   <div class="content-frame fadeUp">
@@ -129,7 +133,7 @@ if (process.env.NODE_ENV === "production") {
   > div {
     text-indent: 2rem;
     margin: 1rem 0;
-    width: unquote("min(100% - 2rem, 40rem)");
+    width: min(calc(100% - 2rem), 40rem);
     font-size: 1.4rem;
     text-align: left;
     margin-inline: auto;
@@ -193,7 +197,7 @@ if (process.env.NODE_ENV === "production") {
   color: white;
   text-align: center;
   box-sizing: border-box;
-  width: unquote("min(100% - 1rem, 70rem)");
+  width: min(calc(100% - 1rem), 70rem);
   margin-inline: auto;
   position: relative;
   overflow: hidden;

@@ -45,10 +45,7 @@ watch(route, () => {
           <router-link active-class="header_active" to="/about">
             <li class="hover-underline-animation">清陵祭とは</li>
           </router-link>
-          <router-link :to="{
-            name:'event_list',
-            params:{type:1}
-          }" active-class="header_active" routerLinkActive="">
+          <router-link active-class="header_active" to="/events">
             <li class="hover-underline-animation">企画を見る</li>
           </router-link>
           <router-link active-class="header_active" to="/pamphlet">
@@ -65,7 +62,7 @@ watch(route, () => {
         <router-link active-class="selected" to="/" @click="closeMenu">ホーム</router-link>
         <router-link active-class="selected" to="/about" @click="closeMenu">清陵祭とは</router-link>
         <router-link active-class="selected" to="/update" @click="closeMenu">更新情報</router-link>
-        <router-link :to="{name:'event_list',params:{type:1}}" active-class="selected" @click="closeMenu">企画を見る
+        <router-link active-class="selected" to="/events" @click="closeMenu">企画を見る
         </router-link>
         <router-link active-class="selected" to="/pamphlet" @click="closeMenu">パンフレット</router-link>
         <router-link active-class="selected" to="/sponsors" @click="closeMenu">ご協賛について</router-link>
@@ -184,7 +181,7 @@ header {
   z-index: 100;
   transition: all 0.5s 0s ease-in-out;
   padding: 85px 20px;
-  width: unquote("min(220px, 80vw)");
+  width: min(220px, 80vw);
   height: 100vh;
   display: flex;
   flex-wrap: nowrap;
