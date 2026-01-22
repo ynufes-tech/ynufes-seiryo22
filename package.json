@@ -8,9 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.28.0",
+    "axios": "^0.30.2",
     "core-js": "^3.22.1",
-    "express": "^4.19.2",
+    "express": "^4.22.1",
     "microcms-js-sdk": "^2.0.0",
     "vue": "^3.2.33",
     "vue-gtag": "^2.0.1",
@@ -19,7 +19,7 @@
     "vue-tweet": "^1.2.1",
     "vuejs-twitter-feed": "^1.0.1",
     "vuex": "^4.0.2",
-    "webpack": "^5.76.0"
+    "webpack": "^5.104.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
