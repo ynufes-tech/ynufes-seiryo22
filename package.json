@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.3",
-    "axios": "^1.13.2",
+    "axios": "^1.13.4",
     "microcms-js-sdk": "^2.7.0",
     "nuxt": "^4.2.2",
     "pinia": "^3.0.4",
