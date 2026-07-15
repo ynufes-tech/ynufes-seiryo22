@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits"
+  ],
+  "timezone": "Asia/Tokyo",
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "マイナー・パッチ更新を1つのPRにまとめる",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "非メジャー依存関係アップデート",
+      "groupSlug": "all-minor-patch"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "osvVulnerabilityAlerts": true
+}
