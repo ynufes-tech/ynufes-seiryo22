@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.3",
-    "axios": "^1.13.2",
+    "axios": "^1.16.0",
     "microcms-js-sdk": "^2.7.0",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.4.7",
     "pinia": "^3.0.4",
     "swiper": "^8.4.7",
     "vue-gtag": "^2.1.2",
@@ -21,7 +21,7 @@
     "vuejs-twitter-feed": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "eslint": "^9.39.1",
     "eslint-plugin-vue": "^9.33.0",
