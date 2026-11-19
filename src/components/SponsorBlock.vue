@@ -2,7 +2,8 @@
 import axios from 'axios';
 import {event} from 'vue-gtag';
 import {Swiper, SwiperSlide} from 'swiper/vue';
-import SwiperCore, {Autoplay} from 'swiper';
+import SwiperCore from 'swiper';
+import {Autoplay} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import {useMainStore} from '@/stores/main';
