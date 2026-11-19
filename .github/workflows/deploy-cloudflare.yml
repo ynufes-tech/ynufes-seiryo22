@@ -18,6 +18,8 @@ jobs:
       - name: Deploy to Cloudflare (Main)
         uses: ynufes-tech/reusable-actions/.github/actions/cf-worker-deploy@main
         with:
+          node_version: "24.22.3"
+          build_command: pnpm audit --prod --audit-level=low && pnpm build
           worker_name: "ynufes-seiryo22"
           wrangler_template: "wrangler.template.toml"
           cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
