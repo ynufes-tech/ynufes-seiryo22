@@ -18,3 +18,15 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm audit --prod --audit-level=low
+      - name: Build the Worker
+        run: pnpm build
+        env:
+          NITRO_PRESET: cloudflare-module
+      - name: Check the rendered home page
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: |
+          npx --yes wrangler@4.164.0 dev .output/server/index.mjs --assets .output/public --compatibility-date 2025-09-28 --compatibility-flags nodejs_compat --local --port 8787 > /tmp/archive-worker.log 2>&1 &
+          worker_pid=$!
+          trap 'cat /tmp/archive-worker.log; kill "$worker_pid" || true' EXIT
+          curl --fail --silent --show-error --retry 30 --retry-all-errors --retry-delay 2 http://127.0.0.1:8787/ -o /dev/null

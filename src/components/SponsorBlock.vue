@@ -1,5 +1,4 @@
 <script setup>
-import axios from 'axios';
 import {event} from 'vue-gtag';
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import SwiperCore from 'swiper';
@@ -26,7 +25,7 @@ const access = async function (id) {
       sponsor_id: id
     });
   }
-  axios.get('https://shion1305.com/seiryo22/request?target=' + id);
+  void fetch('https://shion1305.com/seiryo22/request?target=' + encodeURIComponent(id)).catch(() => {});
 }
 </script>
 <template>

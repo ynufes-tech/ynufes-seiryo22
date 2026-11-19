@@ -1,0 +1,71 @@
+[
+  {
+    "id": "f0xf11pap5",
+    "createdAt": "2022-09-29T16:44:54.706Z",
+    "updatedAt": "2022-09-29T16:44:54.706Z",
+    "publishedAt": "2022-09-29T16:44:54.706Z",
+    "revisedAt": "2022-09-29T16:44:54.706Z",
+    "slide": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/469aa80c53d141c68b2e18cbcbf7e334/ogp_image.webp",
+      "height": 630,
+      "width": 1200
+    },
+    "isRouterLink": false,
+    "link": "https://tokiwa22.ynu-fes.yokohama"
+  },
+  {
+    "id": "lzik7w7ip",
+    "createdAt": "2022-06-04T13:00:05.557Z",
+    "updatedAt": "2022-06-05T03:00:02.916Z",
+    "publishedAt": "2022-06-04T13:00:05.557Z",
+    "revisedAt": "2022-06-05T03:00:02.916Z",
+    "slide": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/63b5931688874f16854e2307d12c03b6/teisei3%20(1).webp",
+      "height": 540,
+      "width": 1080
+    },
+    "isRouterLink": false
+  },
+  {
+    "id": "wcfynei99",
+    "createdAt": "2022-05-21T00:30:00.825Z",
+    "updatedAt": "2022-05-21T00:30:00.825Z",
+    "publishedAt": "2022-05-21T00:30:00.825Z",
+    "revisedAt": "2022-05-21T00:30:00.825Z",
+    "slide": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/658fe510a85b460aa6b65530039bff93/%E4%BB%96%E5%A4%A7%E5%AD%A6%E7%A5%AD%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.webp",
+      "height": 500,
+      "width": 1000
+    },
+    "isRouterLink": true,
+    "link": "/others"
+  },
+  {
+    "id": "p2glct_14vi",
+    "createdAt": "2022-05-20T23:33:21.501Z",
+    "updatedAt": "2022-05-20T23:33:21.501Z",
+    "publishedAt": "2022-05-20T23:33:21.501Z",
+    "revisedAt": "2022-05-20T23:33:21.501Z",
+    "slide": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/a0607f1e770b4610acae1c1b519dfdd5/%E3%81%AF%E3%81%BE%E3%83%95%E3%82%A7%E3%82%B9%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.webp",
+      "height": 500,
+      "width": 1000
+    },
+    "isRouterLink": true,
+    "link": "/hama_fes"
+  },
+  {
+    "id": "1ivdry-zijqt",
+    "createdAt": "2022-05-20T23:30:24.895Z",
+    "updatedAt": "2022-05-20T23:30:24.895Z",
+    "publishedAt": "2022-05-20T23:30:24.895Z",
+    "revisedAt": "2022-05-20T23:30:24.895Z",
+    "slide": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/2dcd1ea5fb184fc8b38f90ac895748b9/Youtube%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.webp",
+      "height": 500,
+      "width": 1000
+    },
+    "isRouterLink": false,
+    "link": "https://www.youtube.com/channel/UC1XaGlL_FJnny3BtDxNBgsw"
+  }
+]

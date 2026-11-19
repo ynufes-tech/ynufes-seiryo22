@@ -1,47 +1,25 @@
 <script setup>
-import {createClient} from 'microcms-js-sdk';
 import {onBeforeUnmount, onMounted, ref} from 'vue';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {useMainStore} from '@/stores/main';
-import {useRuntimeConfig} from '#imports';
+import updates from '@/data/archive/updates.json';
+import slides from '@/data/archive/slides.json';
+import sponsors from '@/data/archive/ads.json';
 
 const loaded = ref(false);
 const store = useMainStore();
-const runtimeConfig = useRuntimeConfig();
-const client = createClient({
-  serviceDomain: runtimeConfig.public.microcmsServiceDomain,
-  apiKey: runtimeConfig.public.microcmsApiKey
-});
-
+// Preserve the published archive without exposing or depending on a CMS credential.
 function getLatestUpdate() {
-  client
-    .get({
-      endpoint: 'updates'
-    })
-    .then((data) => {
-      store.setUpdates(data.contents);
-    });
+  store.setUpdates(updates);
 }
 
 function getLatestSlides() {
-  client
-    .get({
-      endpoint: 'slides'
-    })
-    .then((data) => {
-      store.setSlides(data.contents);
-    });
+  store.setSlides(slides);
 }
 
 function getLatestSponsors() {
-  client
-    .get({
-      endpoint: 'ads'
-    })
-    .then((data) => {
-      store.setSponsors(data.contents);
-    });
+  store.setSponsors(sponsors);
 }
 
 const handleWindowLoad = () => {
