@@ -59,11 +59,5 @@ export default defineNuxtConfig({
         style: "margin:0; padding: 0; font-family: 'Noto Serif JP', serif;"
       }
     }
-  },
-  runtimeConfig: {
-    public: {
-      microcmsServiceDomain: 'ynufes-seiryo22',
-      microcmsApiKey: '26191c4b25ad49f1a00e982735c5831e5ab5'
-    }
   }
 });

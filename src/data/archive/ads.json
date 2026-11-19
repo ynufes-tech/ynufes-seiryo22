@@ -1,0 +1,30 @@
+[
+  {
+    "id": "emawzrggba9",
+    "createdAt": "2023-05-03T16:52:21.664Z",
+    "updatedAt": "2023-05-03T16:52:21.664Z",
+    "publishedAt": "2023-05-03T16:52:21.664Z",
+    "revisedAt": "2023-05-03T16:52:21.664Z",
+    "image": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/93c9a8c13f474b74b47f332f442233e8/S__3293214.webp",
+      "height": 200,
+      "width": 600
+    },
+    "url": "https://www.sotetsu-joinus.com/",
+    "sponsor": 8202
+  },
+  {
+    "id": "znmkthk7el",
+    "createdAt": "2023-05-03T16:50:58.723Z",
+    "updatedAt": "2023-05-03T16:50:58.723Z",
+    "publishedAt": "2023-05-03T16:50:58.723Z",
+    "revisedAt": "2023-05-03T16:50:58.723Z",
+    "image": {
+      "url": "https://images.microcms-assets.io/assets/53cfa18c7f76461e8d65df94e823b722/0742d2a13e1a48d8a8ce6d52e8a28c07/KUBOTA.png",
+      "height": 200,
+      "width": 600
+    },
+    "url": "http://www.hazawa-kubotaganka.com/",
+    "sponsor": 8201
+  }
+]
